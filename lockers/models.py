@@ -1,5 +1,6 @@
 from django.db import models
 from postigen.common_constants import SIZE_CHOICES, STATUS_CHOICES
+from utils import get_size_display
 
 
 class Locker(models.Model):
@@ -10,8 +11,7 @@ class Locker(models.Model):
 		null=False,
 		blank=False,
 	)
-	locker_size = models.CharField(
-		max_length=2,
+	size = models.IntegerField(
 		choices=SIZE_CHOICES,
 		null=False,
 		blank=False,
@@ -23,3 +23,6 @@ class Locker(models.Model):
 		null=False,
 		blank=False,
 	)
+
+	def __str__(self):
+		return f"{get_size_display(self)} - {self.location_address}"
