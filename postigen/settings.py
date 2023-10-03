@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     "postigen",
     "parcels",
     "customers",
-    "parcel_lockers",
+    "lockers",
 ]
 
 MIDDLEWARE = [

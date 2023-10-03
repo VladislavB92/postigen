@@ -1,17 +1,14 @@
 from django.db import models
+from lockers.models import Locker
+from postigen.common_constants import SIZE_CHOICES
 from customers.models import Customer
-
-PARCEL_SIZE_CHOICES = [
-	("XS", "Extra Small"),
-	("S", "Small"),
-	("M", "Medium"),
-	("L", "Large"),
-	("XL", "Extra Large"),
-]
 
 
 class Parcel(models.Model):
-	"""Parcel model."""
+	"""
+	Parcel model.
+	Includes sender and receiver as unite Customer model.
+	"""
 
 	sender = models.ManyToManyField(
 		Customer,
@@ -22,8 +19,14 @@ class Parcel(models.Model):
 		related_name="receiver",
 	)
 	parcel_size = models.CharField(
-		max_length=11,
-		choices=PARCEL_SIZE_CHOICES,
+		max_length=2,
+		choices=SIZE_CHOICES,
+		null=False,
+		blank=False,
+	)
+	locker = models.ForeignKey(
+		Locker,
+		models.PROTECT,
 		null=False,
 		blank=False,
 	)
