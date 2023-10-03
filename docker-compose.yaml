@@ -1,0 +1,24 @@
+version: "3.3"
+
+services:
+  db:
+    env_file: .local.env
+    image: postgres:14
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+  app:
+    environment:
+      - DJANGO_DEVELOPMENT=true
+    restart: always
+    build: .
+    command: ["./entrypoint.sh", "python", "manage.py", "runserver", "0.0.0.0:80"]
+    volumes:
+      - .:/app
+    ports:
+      - "8000:80"
+    env_file: .local.env
+    depends_on:
+      - db
