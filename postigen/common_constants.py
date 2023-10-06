@@ -1,9 +1,9 @@
 SIZE_CHOICES = [
-	(1, "Extra Small"),
-	(2, "Small"),
-	(3, "Medium"),
-	(4, "Large"),
-	(5, "Extra Large"),
+	(1, "XS"),
+	(2, "S"),
+	(3, "M"),
+	(4, "L"),
+	(5, "XL"),
 ]
 
 STATUS_CHOICES = [

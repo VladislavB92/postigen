@@ -3,6 +3,7 @@ from rest_framework.decorators import action
 from rest_framework.generics import (
 	ListCreateAPIView,
 )
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -19,9 +20,11 @@ class ParcelListCreateView(ListCreateAPIView):
 class ParcelDetailViewSet(ModelViewSet):
 	queryset = Parcel.objects.all()
 	serializer_class = ParcelSerializer
+	authentication_classes = []
+	permission_classes = [AllowAny]
 
 	@action(detail=True, methods=["put"], url_path="put-parcel")
-	def put_parcel_to_locker(self, request):
+	def put_parcel_to_locker(self, request, pk=None):
 		parcel = self.get_object()
 		locker_id = request.data.get("locker_id")
 
@@ -39,14 +42,16 @@ class ParcelDetailViewSet(ModelViewSet):
 		return Response(
 			{
 				"message": "Parcel placed in the locker at "
+						   f"ID {parcel.locker.id} - "
 						   f"{parcel.locker.location_address} successfully"
 			},
 			status=status.HTTP_200_OK
 		)
 
 	@action(detail=True, methods=["put"], url_path="move-parcel")
-	def move_parcel_between_lockers(self, request):
+	def move_parcel_between_lockers(self, request, pk=None):
 		parcel = self.get_object()
+		old_locker = parcel.locker
 		new_locker_id = request.data.get("new_locker_id")
 
 		try:
@@ -63,8 +68,10 @@ class ParcelDetailViewSet(ModelViewSet):
 		parcel.save()
 		return Response(
 			{
-				"message": "Parcel moved to a new locker "
-						   f"{parcel.locker.location_address} successfully",
+				"message": f"Parcel moved from {old_locker.id} - "
+						   f"{old_locker.location_address} to a new locker "
+						   f"{new_locker_id} - "
+						   f"{new_locker.location_address} successfully",
 			},
 			status=status.HTTP_200_OK,
 		)

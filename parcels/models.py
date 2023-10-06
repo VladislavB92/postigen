@@ -43,17 +43,16 @@ class Parcel(models.Model):
 				raise ValidationError(
 					{
 						"status": "The locker is not available: "
-								  f"{self.locker.status}"
+								  f"{self.locker.status}",
 					}
 				)
-
 			if self.size > self.locker.size:
 				raise ValidationError(
 					{
 						"size": "The size of the parcel exceeds "
 								"locker's size: "
 								f"{get_size_display(self)} "
-								f"> {get_size_display(self.locker)}"
+								f"> {get_size_display(self.locker)}",
 					}
 				)
 
@@ -62,7 +61,6 @@ class Parcel(models.Model):
 		if self.locker:
 			self.locker.status = STATUS_CHOICES[1][0]  # busy
 			self.locker.save()
-
 		return super().save(*args, **kwargs)
 
 
@@ -79,5 +77,7 @@ def update_locker_status(sender, instance, **kwargs):
 			previous_locker = original_instance.locker
 			previous_locker.status = STATUS_CHOICES[0][0] # free
 			previous_locker.save()
-	except Parcel.DoesNotExist:
-		pass
+	except Parcel.DoesNotExist as e:
+		return {
+			"parcel": f"{e}",
+		}
