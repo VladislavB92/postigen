@@ -36,27 +36,28 @@ class Parcel(models.Model):
 		return f"Parcel ID {self.id}"
 
 	def clean(self):
-		if self.locker.status != "free":
-			raise ValidationError(
-				{
-					"status": "The locker is not available: "
-							  f"{self.locker.status}"
-				}
-			)
+		if self.locker:
+			if self.locker.status != "free":
+				raise ValidationError(
+					{
+						"status": "The locker is not available: "
+								  f"{self.locker.status}"
+					}
+				)
 
-		if self.size > self.locker.size:
-			raise ValidationError(
-				{
-					"size": "The size of the parcel exceeds "
-							"locker's size: "
-							f"{get_size_display(self)} "
-							f"> {get_size_display(self.locker)}"
-				}
-			)
+			if self.size > self.locker.size:
+				raise ValidationError(
+					{
+						"size": "The size of the parcel exceeds "
+								"locker's size: "
+								f"{get_size_display(self)} "
+								f"> {get_size_display(self.locker)}"
+					}
+				)
 
 	def save(self, *args, **kwargs):
 		self.full_clean()
 		if self.locker:
 			self.locker.status = STATUS_CHOICES[1][0]  # busy
-		self.locker.save()
+			self.locker.save()
 		return super().save(*args, **kwargs)
