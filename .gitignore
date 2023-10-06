@@ -3,3 +3,4 @@
 /.idea/
 /.local.env
 /data/
+/.pytest_cache/
