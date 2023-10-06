@@ -73,7 +73,7 @@ def update_locker_status(sender, instance, **kwargs):
 	"""
 	try:
 		original_instance = Parcel.objects.get(pk=instance.pk)
-		if original_instance.locker and not instance.locker:
+		if original_instance.locker:
 			previous_locker = original_instance.locker
 			previous_locker.status = STATUS_CHOICES[0][0] # free
 			previous_locker.save()

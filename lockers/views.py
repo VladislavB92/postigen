@@ -3,6 +3,7 @@ from rest_framework.decorators import action
 from rest_framework.generics import (
 	ListCreateAPIView,
 )
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -19,9 +20,11 @@ class LockerListCreateView(ListCreateAPIView):
 class LockerDetailView(ModelViewSet):
 	queryset = Locker.objects.all()
 	serializer_class = LockerSerializer
+	authentication_classes = []
+	permission_classes = [AllowAny]
 
 	@action(detail=True, methods=["put"], url_path="take-parcel")
-	def take_parcel_from_locker(self, request):
+	def take_parcel_from_locker(self, request, pk=None):
 		locker = self.get_object()
 		parcel_id = request.data.get("parcel_id")
 

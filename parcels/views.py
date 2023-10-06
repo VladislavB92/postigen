@@ -1,3 +1,4 @@
+from django.db.models.signals import pre_save
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.generics import (
@@ -51,7 +52,6 @@ class ParcelDetailViewSet(ModelViewSet):
 	@action(detail=True, methods=["put"], url_path="move-parcel")
 	def move_parcel_between_lockers(self, request, pk=None):
 		parcel = self.get_object()
-		old_locker = parcel.locker
 		new_locker_id = request.data.get("new_locker_id")
 
 		try:
@@ -65,11 +65,11 @@ class ParcelDetailViewSet(ModelViewSet):
 			)
 
 		parcel.locker = new_locker
+		pre_save.send(sender=Parcel, instance=parcel)
 		parcel.save()
 		return Response(
 			{
-				"message": f"Parcel moved from {old_locker.id} - "
-						   f"{old_locker.location_address} to a new locker "
+				"message": f"Parcel moved from to a new locker "
 						   f"{new_locker_id} - "
 						   f"{new_locker.location_address} successfully",
 			},
