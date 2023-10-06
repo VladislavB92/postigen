@@ -1,0 +1,220 @@
+[
+  {
+    "model": "parcels.parcel",
+    "pk": 1,
+    "fields": {
+      "size": 1,
+      "locker": null,
+      "sender": [
+        1
+      ],
+      "receiver": [
+        2
+      ]
+    }
+  },
+  {
+    "model": "parcels.parcel",
+    "pk": 2,
+    "fields": {
+      "size": 1,
+      "locker": 3,
+      "sender": [
+        2
+      ],
+      "receiver": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "parcels.parcel",
+    "pk": 35,
+    "fields": {
+      "size": 1,
+      "locker": null,
+      "sender": [
+        2
+      ],
+      "receiver": [
+        1
+      ]
+    }
+  },
+  {
+    "model": "parcels.parcel",
+    "pk": 36,
+    "fields": {
+      "size": 2,
+      "locker": 4,
+      "sender": [
+        1
+      ],
+      "receiver": [
+        2
+      ]
+    }
+  },
+  {
+    "model": "parcels.parcel",
+    "pk": 37,
+    "fields": {
+      "size": 4,
+      "locker": null,
+      "sender": [
+        5
+      ],
+      "receiver": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "parcels.parcel",
+    "pk": 38,
+    "fields": {
+      "size": 5,
+      "locker": null,
+      "sender": [
+        2
+      ],
+      "receiver": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "parcels.parcel",
+    "pk": 39,
+    "fields": {
+      "size": 1,
+      "locker": 8,
+      "sender": [
+        3
+      ],
+      "receiver": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "customers.customer",
+    "pk": 1,
+    "fields": {
+      "email": "vladislavs@codnity.com",
+      "phone": "+37122222222"
+    }
+  },
+  {
+    "model": "customers.customer",
+    "pk": 2,
+    "fields": {
+      "email": "vacuvom@mailinator.com",
+      "phone": "+37125863000"
+    }
+  },
+  {
+    "model": "customers.customer",
+    "pk": 3,
+    "fields": {
+      "email": "niku@mailinator.com",
+      "phone": "+37122345654"
+    }
+  },
+  {
+    "model": "customers.customer",
+    "pk": 4,
+    "fields": {
+      "email": "nizehef@mailinator.com",
+      "phone": "+37125863034"
+    }
+  },
+  {
+    "model": "customers.customer",
+    "pk": 5,
+    "fields": {
+      "email": "supergirl@gmail.com",
+      "phone": "+37123456534"
+    }
+  },
+  {
+    "model": "customers.customer",
+    "pk": 6,
+    "fields": {
+      "email": "hamsterchunk@supermail.cc",
+      "phone": "+37223457863"
+    }
+  },
+  {
+    "model": "lockers.locker",
+    "pk": 3,
+    "fields": {
+      "location_address": "Dzelzavas iela 2, Vidzemes priekšpilsēta, Rīga, LV-1084",
+      "size": 1,
+      "status": "busy"
+    }
+  },
+  {
+    "model": "lockers.locker",
+    "pk": 4,
+    "fields": {
+      "location_address": "Maskavas iela 5, Latgales priekšpilsēta, Rīga, LV-1050",
+      "size": 2,
+      "status": "busy"
+    }
+  },
+  {
+    "model": "lockers.locker",
+    "pk": 5,
+    "fields": {
+      "location_address": "Nīcgales iela 54, Latgales priekšpilsēta, Rīga, LV-1035",
+      "size": 1,
+      "status": "free"
+    }
+  },
+  {
+    "model": "lockers.locker",
+    "pk": 6,
+    "fields": {
+      "location_address": "Ieriķu iela 43a, Vidzemes priekšpilsēta, Rīga, LV-1084",
+      "size": 4,
+      "status": "free"
+    }
+  },
+  {
+    "model": "lockers.locker",
+    "pk": 7,
+    "fields": {
+      "location_address": "Brīvības iela 250, Vidzemes priekšpilsēta, Rīga, LV-1039",
+      "size": 5,
+      "status": "out_of_order"
+    }
+  },
+  {
+    "model": "lockers.locker",
+    "pk": 8,
+    "fields": {
+      "location_address": "Krišjāņa Barona iela 130/2, Latgales priekšpilsēta, Rīga, LV-1012",
+      "size": 3,
+      "status": "busy"
+    }
+  },
+  {
+    "model": "lockers.locker",
+    "pk": 9,
+    "fields": {
+      "location_address": "Tallinas iela 10, Centra rajons, Rīga, LV-1001",
+      "size": 3,
+      "status": "free"
+    }
+  },
+  {
+    "model": "lockers.locker",
+    "pk": 10,
+    "fields": {
+      "location_address": "Elizabetes iela 83-85, Centra rajons, Rīga, LV-1050",
+      "size": 2,
+      "status": "free"
+    }
+  }
+]
