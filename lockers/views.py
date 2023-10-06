@@ -1,8 +1,6 @@
 from rest_framework import status
 from rest_framework.decorators import action
-from rest_framework.generics import (
-	ListCreateAPIView,
-)
+from rest_framework.generics import ListCreateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -33,14 +31,14 @@ class LockerDetailView(ModelViewSet):
 		except Parcel.DoesNotExist:
 			return Response(
 				{
-					"error": "Parcel not found",
+					"error": "Parcel not found"
 				},
 				status=status.HTTP_404_NOT_FOUND
 			)
 
 		if parcel.locker != locker:
 			return Response({
-				"error": "Parcel is not in this locker",
+				"error": "Parcel is not in this locker"
 			},
 				status=status.HTTP_400_BAD_REQUEST,
 			)
@@ -48,7 +46,7 @@ class LockerDetailView(ModelViewSet):
 		parcel.locker = None
 		parcel.save()
 		return Response({
-			"message": "Parcel taken from locker successfully",
+			"message": "Parcel taken from locker successfully"
 		},
 			status=status.HTTP_200_OK,
 		)
