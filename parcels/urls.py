@@ -1,15 +1,11 @@
-from django.urls import path
-from .views import ParcelListCreateView, ParcelDetailView
+from django.urls import include, path
+from rest_framework.routers import DefaultRouter
+
+from .views import ParcelDetailViewSet
+
+router = DefaultRouter()
+router.register(r"", ParcelDetailViewSet)
 
 urlpatterns = [
-	path(
-		"",
-		ParcelListCreateView.as_view(),
-		name="parcel-list-create",
-	),
-	path(
-		"<int:pk>/",
-		ParcelDetailView.as_view(),
-		name="parcel-detail",
-	),
+	path("", include(router.urls)),
 ]

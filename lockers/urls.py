@@ -1,15 +1,11 @@
-from django.urls import path
-from .views import LockerListCreateView, LockerDetailView
+from django.urls import include, path
+from rest_framework.routers import DefaultRouter
+
+from .views import LockerDetailView
+
+router = DefaultRouter()
+router.register(r"", LockerDetailView)
 
 urlpatterns = [
-	path(
-		"",
-		LockerListCreateView.as_view(),
-		name="locker-list-create",
-	),
-	path(
-		"<int:pk>/",
-		LockerDetailView.as_view(),
-		name="locker-detail",
-	),
+	path("", include(router.urls)),
 ]

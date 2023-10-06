@@ -14,7 +14,7 @@ services:
       - DJANGO_DEVELOPMENT=true
     restart: always
     build: .
-    command: ["./entrypoint.sh", "python", "manage.py", "runserver", "0.0.0.0:80"]
+    command: ["entrypoint.sh", "python", "manage.py", "runserver", "0.0.0.0:80"]
     volumes:
       - .:/app
     ports:
