@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from rest_framework.exceptions import ValidationError
 from lockers.models import Locker
 from postigen.common_constants import SIZE_CHOICES, STATUS_CHOICES
@@ -60,4 +62,22 @@ class Parcel(models.Model):
 		if self.locker:
 			self.locker.status = STATUS_CHOICES[1][0]  # busy
 			self.locker.save()
+
 		return super().save(*args, **kwargs)
+
+
+@receiver(pre_save, sender=Parcel)
+def update_locker_status(sender, instance, **kwargs):
+	"""
+	Model signal that makes the locker's status empty
+	when the parcel has been taken out,
+	before saving the parcels instance.
+	"""
+	try:
+		original_instance = Parcel.objects.get(pk=instance.pk)
+		if original_instance.locker and not instance.locker:
+			previous_locker = original_instance.locker
+			previous_locker.status = STATUS_CHOICES[0][0] # free
+			previous_locker.save()
+	except Parcel.DoesNotExist:
+		pass
