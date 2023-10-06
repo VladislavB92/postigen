@@ -8,11 +8,11 @@ urlpatterns = [
 	path(
 		"",
 		CustomerListCreateView.as_view(),
-		name="customer-list-create",
+		name="customer_list_create",
 	),
 	path(
 		"<int:pk>/",
 		CustomerDetailView.as_view(),
-		name="customer-detail",
+		name="customer_detail",
 	),
 ]

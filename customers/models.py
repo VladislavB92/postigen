@@ -10,6 +10,7 @@ class Customer(models.Model):
 	def __str__(self):
 		return f"{self.email}"
 
+
 	def sanitize_phone_number(self):
 		self.phone = self.phone.replace(" ", "")
 

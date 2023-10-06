@@ -1,10 +1,8 @@
 from django.db.models.signals import pre_save
 from rest_framework import status
-from rest_framework.decorators import action
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, UpdateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.viewsets import ModelViewSet
 
 from lockers.models import Locker
 from .models import Parcel
@@ -16,15 +14,14 @@ class ParcelListCreateView(ListCreateAPIView):
 	serializer_class = ParcelSerializer
 
 
-class ParcelDetailViewSet(ModelViewSet):
+class PutParcelView(UpdateAPIView):
 	queryset = Parcel.objects.all()
 	serializer_class = ParcelSerializer
 	authentication_classes = []
 	permission_classes = [AllowAny]
 
-	@action(detail=True, methods=["put"], url_path="put-parcel")
-	def put_parcel_to_locker(self, request, pk=None):
-		parcel = self.get_object()
+	def put(self, request, pk=None, *args, **kwargs):
+		parcel = self.queryset.get(pk=pk)
 		locker_id = request.data.get("locker_id")
 
 		try:
@@ -41,17 +38,29 @@ class ParcelDetailViewSet(ModelViewSet):
 		return Response(
 			{
 				"message": "Parcel placed in the locker at "
-						   f"ID {parcel.locker.id} - "
-						   f"{parcel.locker.location_address} successfully"
+						   "ID {parcel.locker.id} -{parcel.locker.location_address} successfully"
 			},
 			status=status.HTTP_200_OK
 		)
 
-	@action(detail=True, methods=["put"], url_path="move-parcel")
-	def move_parcel_between_lockers(self, request, pk=None):
-		parcel = self.get_object()
+
+class MoveParcelView(UpdateAPIView):
+	queryset = Parcel.objects.all()
+	serializer_class = ParcelSerializer
+	authentication_classes = []
+	permission_classes = [AllowAny]
+
+	def put(self, request, pk=None, *args, **kwargs):
+		parcel = self.queryset.filter(pk=pk).first()
 		new_locker_id = request.data.get("new_locker_id")
 
+		if not parcel:
+			return Response(
+				{
+					"error": "Parcel not found"
+				},
+				status=status.HTTP_404_NOT_FOUND,
+			)
 		try:
 			new_locker = Locker.objects.get(pk=new_locker_id)
 		except Locker.DoesNotExist:
@@ -61,7 +70,6 @@ class ParcelDetailViewSet(ModelViewSet):
 				},
 				status=status.HTTP_404_NOT_FOUND,
 			)
-
 		parcel.locker = new_locker
 		pre_save.send(sender=Parcel, instance=parcel)
 		parcel.save()
