@@ -1,7 +1,7 @@
 from django.db import models
 from rest_framework.exceptions import ValidationError
 from lockers.models import Locker
-from postigen.common_constants import SIZE_CHOICES
+from postigen.common_constants import SIZE_CHOICES, STATUS_CHOICES
 from customers.models import Customer
 from utils import get_size_display
 
@@ -28,8 +28,8 @@ class Parcel(models.Model):
 	locker = models.ForeignKey(
 		Locker,
 		models.PROTECT,
-		null=False,
-		blank=False,
+		null=True,
+		blank=True,
 	)
 
 	def __str__(self):
@@ -56,4 +56,7 @@ class Parcel(models.Model):
 
 	def save(self, *args, **kwargs):
 		self.full_clean()
+		if self.locker:
+			self.locker.status = STATUS_CHOICES[1][0]  # busy
+		self.locker.save()
 		return super().save(*args, **kwargs)
