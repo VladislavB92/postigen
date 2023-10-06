@@ -5,7 +5,7 @@ from rest_framework.exceptions import ValidationError
 from lockers.models import Locker
 from postigen.common_constants import SIZE_CHOICES, STATUS_CHOICES
 from customers.models import Customer
-from utils import get_size_display
+from .utils import get_size_display
 
 
 class Parcel(models.Model):

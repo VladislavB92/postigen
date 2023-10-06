@@ -1,4 +1,4 @@
-from common_constants import SIZE_CHOICES
+from postigen.common_constants import SIZE_CHOICES
 
 
 def get_size_display(locker_or_parsel):

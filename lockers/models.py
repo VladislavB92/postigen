@@ -1,6 +1,6 @@
 from django.db import models
 from postigen.common_constants import SIZE_CHOICES, STATUS_CHOICES
-from utils import get_size_display
+from parcels.utils import get_size_display
 
 
 class Locker(models.Model):
