@@ -52,7 +52,7 @@ class MoveParcelView(UpdateAPIView):
 
 	def put(self, request, pk=None, *args, **kwargs):
 		parcel = self.queryset.filter(pk=pk).first()
-		new_locker_id = request.data.get("new_locker_id")
+		new_locker_id = int(request.data.get("new_locker_id"))
 
 		if not parcel:
 			return Response(
@@ -60,6 +60,13 @@ class MoveParcelView(UpdateAPIView):
 					"error": "Parcel not found"
 				},
 				status=status.HTTP_404_NOT_FOUND,
+			)
+		if parcel.locker_id == new_locker_id:
+			return Response(
+				{
+					"message": "Parcel is already in the destination locker",
+				},
+				status=status.HTTP_200_OK,
 			)
 		try:
 			new_locker = Locker.objects.get(pk=new_locker_id)
