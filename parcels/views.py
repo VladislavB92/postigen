@@ -2,7 +2,7 @@ from django.db.models.signals import pre_save
 from rest_framework import status
 from rest_framework.generics import (
 	ListCreateAPIView,
-	RetrieveAPIView,
+	RetrieveDestroyAPIView,
 	UpdateAPIView,
 )
 from rest_framework.permissions import AllowAny
@@ -20,7 +20,7 @@ class ParcelListCreateView(ListCreateAPIView):
 	permission_classes = [AllowAny]
 
 
-class ParcelDetailsView(RetrieveAPIView):
+class ParcelDetailsView(RetrieveDestroyAPIView):
 	queryset = Parcel.objects.all()
 	serializer_class = ParcelSerializer
 	authentication_classes = []

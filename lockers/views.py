@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.generics import (
 	ListCreateAPIView,
-	RetrieveAPIView,
+	RetrieveDestroyAPIView,
 	UpdateAPIView,
 )
 from rest_framework.permissions import AllowAny
@@ -19,7 +19,7 @@ class LockerListCreateView(ListCreateAPIView):
 	permission_classes = [AllowAny]
 
 
-class LockerDetailsView(RetrieveAPIView):
+class LockerDetailsView(RetrieveDestroyAPIView):
 	queryset = Locker.objects.all()
 	serializer_class = LockerSerializer
 	authentication_classes = []
