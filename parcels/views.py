@@ -1,6 +1,10 @@
 from django.db.models.signals import pre_save
 from rest_framework import status
-from rest_framework.generics import ListCreateAPIView, UpdateAPIView
+from rest_framework.generics import (
+	ListCreateAPIView,
+	RetrieveAPIView,
+	UpdateAPIView,
+)
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
@@ -12,6 +16,15 @@ from .serializers import ParcelSerializer
 class ParcelListCreateView(ListCreateAPIView):
 	queryset = Parcel.objects.all()
 	serializer_class = ParcelSerializer
+	authentication_classes = []
+	permission_classes = [AllowAny]
+
+
+class ParcelDetailsView(RetrieveAPIView):
+	queryset = Parcel.objects.all()
+	serializer_class = ParcelSerializer
+	authentication_classes = []
+	permission_classes = [AllowAny]
 
 
 class PutParcelView(UpdateAPIView):
