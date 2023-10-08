@@ -4,7 +4,7 @@
 
 The Postigen is a simple parcel movement application API.
 The front-end solution you can
-find [here](https://github.com/VladislavB92/postigen-front/blob/main/postigen-front/README.md).
+find [here](https://github.com/VladislavB92/postigen-front/blob/main/README.md). 
 ![postigen-5.png](postigen-5.png)
 It allows:
 
