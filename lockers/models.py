@@ -25,4 +25,7 @@ class Locker(models.Model):
 	)
 
 	def __str__(self):
-		return f"{self.id} - {self.location_address} - {get_size_display(self)}"
+		return (
+			f"{self.id} - {self.location_address} "
+			f"- {get_size_display(self)} - {self.status}"
+		)

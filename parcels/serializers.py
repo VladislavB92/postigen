@@ -20,10 +20,8 @@ class ParcelSerializer(ModelSerializer):
 	def create(self, validated_data):
 		sender_data = validated_data.pop("sender")
 		receiver_data = validated_data.pop("receiver")
-
 		parcel = Parcel.objects.create(**validated_data)
 
-		# Create and add sender and receiver objects
 		for sender_item in sender_data:
 			sender, _ = Customer.objects.get_or_create(**sender_item)
 			parcel.sender.add(sender)
