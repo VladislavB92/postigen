@@ -39,7 +39,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/parcel/:id/",
+							"raw": "http://127.0.0.1:8000/api/parcels/:id/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -50,7 +50,7 @@
 							"port": "8000",
 							"path": [
 								"api",
-								"parcel",
+								"parcels",
 								":id",
 								""
 							],
@@ -116,7 +116,7 @@
 							"formdata": [
 								{
 									"key": "new_locker_id",
-									"value": "5",
+									"value": "",
 									"type": "text"
 								}
 							]
@@ -148,7 +148,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "2"
+									"value": ""
 								}
 							]
 						}
@@ -225,7 +225,7 @@
 							"formdata": [
 								{
 									"key": "parcel_id",
-									"value": "1",
+									"value": "",
 									"type": "text"
 								}
 							]
@@ -250,7 +250,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "4"
+									"value": ""
 								}
 							]
 						}
@@ -281,6 +281,37 @@
 								"api",
 								"customers",
 								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get customer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/customers/:id/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"customers",
+								":id",
+								""
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
 							]
 						}
 					},
