@@ -23,21 +23,21 @@ All CRUD operations can be performed there.
 #### Parcels
 
 - [GET/POST] `/api/parcels/` - list all parcels or create a parcel
-- [GET] `/api/parcel/:id/` - get single parcel by its ID
+- [GET/DELETE] `/api/parcel/:id/` - get or delete single parcel by its ID
 - [PUT] `/api/parcels/:id/put-parcel/` - put parcel in specific locker referencing by its ID
 - [PUT] `/api/parcels/:id/move-parcel/` - move parcel from one locker to another referencing by their IDs
 
 ### Lockers
 
 - [GET/POST] `/api/lockers/` - list all lockers or create one
-- [GET] `/api/lockers/:id/` - get single locker by its ID
+- [GET/DELTE] `/api/lockers/:id/` - get or delete single locker by its ID
 - [PUT] `/api/lockers/:id/take-parcel/` - take out the parcel from the locker by referencing their ID
   as a parameter and body data
 
 ### Customers
 
 - [GET/POST] `/api/customers/` - list all customers or create one
-- [GET] `api/customers/:id/` - get single customer by its ID
+- [GET/DELETE] `api/customers/:id/` - get or delete single customer by its ID
 
 ## TECHNOLOGY
 
