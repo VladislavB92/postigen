@@ -69,13 +69,17 @@ All CRUD operations can be performed there.
 
         docker exec -it <container_id> bash
 
-7. Create a superuser for the CMS admin panel.
+7. Migrate migrations files.
+
+        python manage.py migrate
+
+8. Create a superuser for the CMS admin panel.
 
         python manage.py createsuperuser
 
-8. The project comes with the fixture file which holds pre-made data for quicker testing which can be applied.
+9. The project comes with the fixture file which holds pre-made data for quicker testing which can be applied.
 
-        django-admin loaddata fixtures/initial_data.json
+        python manage.py loaddata fixtures/initial_data.json
 
 #### Local way:
 
